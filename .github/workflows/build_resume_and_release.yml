@@ -21,7 +21,7 @@ jobs:
           default_bump: patch
           tag_prefix: "resume-${{ github.ref_name }}-"
           release_branches: ".*"
-
+          
   build:
     needs: bump_version
     runs-on: ubuntu-latest
