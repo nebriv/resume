@@ -50,12 +50,13 @@ jobs:
       - name: Extract branch and tag info
         shell: bash
         run: |
-          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
-          echo "tag=${GITHUB_REF#refs/tags/}"
-          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
-          echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+              echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          elif [[ $GITHUB_REF == refs/heads/* ]]; then
+              echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+          fi
         id: extract_info
-      
+
       - name: Debug extracted values
         run: |
           echo "Extracted branch: ${{ steps.extract_info.outputs.branch }}"
