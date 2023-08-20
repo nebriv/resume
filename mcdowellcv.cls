@@ -194,10 +194,6 @@
 
 % Print a job entry
 \makeatletter
-% Define toggles checking if titles were defined
-\newtoggle{lefttitledefined}
-\newtoggle{centertitledefined}
-\newtoggle{righttitledefined}
 
 \newenvironment{jobentry}[3]{
 	\notblank{#1}{\toggletrue{lefttitledefined}}{}
