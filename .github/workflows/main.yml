@@ -1,12 +1,56 @@
-name: Build Resume
+name: Build and Release Resume
+
 on:
   push:
-    branches: [ main ]
+    branches:
+      - master # Trigger this workflow on pushes to master branch
+
 jobs:
-  container-test-job:
+  build:
     runs-on: ubuntu-latest
     container:
       image: zidizei/lualatex:latest
+
     steps:
-      - name: Check for dockerenv file
-        run: (which lualatex)
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build resume
+        run: lualatex resume.tex
+
+      - name: Upload resume.pdf as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: resume.pdf
+          path: resume.pdf
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download resume.pdf
+        uses: actions/download-artifact@v2
+        with:
+          name: resume.pdf
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.sha }}
+          release_name: Release ${{ github.sha }}
+          draft: false
+          prerelease: false
+
+      - name: Upload resume.pdf to release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./resume.pdf
+          asset_name: resume.pdf
+          asset_content_type: application/pdf
+
