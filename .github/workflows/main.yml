@@ -1,0 +1,12 @@
+name: Build Resume
+on:
+  push:
+    branches: [ main ]
+jobs:
+  container-test-job:
+    runs-on: ubuntu-latest
+    container:
+      image: zidizei/lualatex:latest
+    steps:
+      - name: Check for dockerenv file
+        run: (which lualatex)
