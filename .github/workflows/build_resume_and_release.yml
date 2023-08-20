@@ -2,8 +2,8 @@ name: Build and Release Resume
 
 on:
   push:
-    branches:
-      - main # Trigger this workflow on pushes to master branch
+    tags:
+      - 'v*'
 
 jobs:
   build:
