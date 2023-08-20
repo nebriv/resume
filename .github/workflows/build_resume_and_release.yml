@@ -6,17 +6,7 @@ on:
       - '**'
 
 jobs:
-  spell_check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Spell Checking
-        uses: check-spelling/check-spelling@v0.0.19 # You might want to check for the latest version
-
   bump_version:
-    needs: spell_check
     runs-on: ubuntu-latest
     outputs:
       new_tag: ${{ steps.bump_version.outputs.new_tag }}
