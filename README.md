@@ -1,5 +1,6 @@
 # Latest Resume
 You can download/view the latest version of my resume here:
+
 https://github.com/nebriv/resume/releases/latest/download/resume.pdf
 
 # Resume Generation
