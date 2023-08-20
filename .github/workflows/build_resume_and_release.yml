@@ -12,7 +12,6 @@ jobs:
       new_tag: ${{ steps.bump_version.outputs.new_tag }}
     steps:
       - uses: actions/checkout@v2
-      
       - name: Bump version and push tag
         id: bump_version
         uses: hennejg/github-tag-action@v4.3.1
