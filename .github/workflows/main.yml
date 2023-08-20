@@ -15,11 +15,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install missing LaTeX packages
-        run: |
-          tlmgr update --self
-          tlmgr install geometry fontspec parskip array etoolbox tabu changepage enumitem microtype
-
       - name: Build resume
         run: lualatex resume.tex
 
