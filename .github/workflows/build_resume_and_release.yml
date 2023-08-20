@@ -50,6 +50,8 @@ jobs:
       - name: Extract branch and tag info
         shell: bash
         run: |
+          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+          echo "tag=${GITHUB_REF#refs/tags/}"
           echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
           echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
         id: extract_info
@@ -57,7 +59,7 @@ jobs:
       - name: Debug extracted values
         run: |
           echo "Extracted branch: ${{ steps.extract_info.outputs.branch }}"
-          echo "Extracted tag: ${{ needs.bump_version.outputs.tag }}"
+          echo "Extracted tag: ${{ steps.extract_info.outputs.tag }}"
 
       - name: Download resume.pdf
         uses: actions/download-artifact@v2
