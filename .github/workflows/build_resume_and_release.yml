@@ -54,6 +54,7 @@ jobs:
 
       - name: Debug extracted values
         run: |
+          echo "echo ${GITHUB_REF#refs/tags/}"
           echo "Extracted tag: ${{ steps.extract_info.outputs.tag }}"
 
       - name: Download resume.pdf
