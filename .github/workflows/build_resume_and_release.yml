@@ -1,16 +1,32 @@
-name: Build and Release Resume
+name: Build, Tag, and Release Resume
 
 on:
   push:
-    tags:
-      - '*'
+    branches: 
+      - '**'
 
 jobs:
+  bump_version:
+    runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{ steps.bump_version.outputs.new_tag }}
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Bump version and push tag
+        id: bump_version
+        uses: hennejg/github-tag-action@v4.3.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          default_bump: patch
+          tag_prefix: ""
+          release_branches: ".*"
+
   build:
+    needs: bump_version
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/nebriv/docker-lualatex:master
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -25,12 +41,8 @@ jobs:
           path: resume.pdf
 
   release:
-    permissions:
-      contents: write
-
     needs: build
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -50,8 +62,7 @@ jobs:
       - name: Release
         uses: ncipollo/release-action@v1
         with:
-          tag: resume-${{ steps.extract_info.outputs.branch }}-${{ steps.extract_info.outputs.tag }}
+          tag: resume-${{ steps.extract_info.outputs.branch }}-${{ needs.bump_version.outputs.new_tag }}
           artifacts: "./resume.pdf"
           body: "Release of the updated resume"
           token: ${{ secrets.GITHUB_TOKEN }}
-
