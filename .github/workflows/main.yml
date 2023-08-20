@@ -3,7 +3,7 @@ name: Build and Release Resume
 on:
   push:
     branches:
-      - master # Trigger this workflow on pushes to master branch
+      - main # Trigger this workflow on pushes to master branch
 
 jobs:
   build:
