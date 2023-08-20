@@ -48,15 +48,25 @@
 
 % Required for ifthenelse statements
 \usepackage{etoolbox} 
+\usepackage{fancyhdr}
+
+\usepackage{hyperref}
 
 % Suppress page numbers
 \pagestyle{empty} 
+\pagestyle{fancy}
 
 % Flexible tables
 \usepackage{tabu}
 
 % For custom margins
 \usepackage{changepage}
+
+\usepackage{multicol}
+
+\usepackage{lastpage}
+
+\usepackage{ifthen}
 
 % To customize lists
 \usepackage{enumitem}
@@ -66,6 +76,10 @@
 
 % For spcaed small caps
 \usepackage{microtype}
+
+\usepackage{needspace}
+
+
 
 \DeclareMicrotypeSet*{smallcapsi} { 
 	encoding = {OT1,T1,T2A,LY1,OT4,QX,T5,TS1,EU1,EU2},
@@ -86,6 +100,8 @@
 \def\afteremptysubsectionheaderspace{3pt}
 \def\subsectionmargin{9pt}
 \def\aftersubsectionspace{3pt}
+
+
 
 %--------------------------------------------------------------------------------
 %                            Header Setup and Printing                          -
@@ -145,6 +161,7 @@
 % Print a section header
 \makeatletter
 \newenvironment{cvsection}[1]{
+  \needspace{5\baselineskip}
 	\vspace*{\beforesectionheaderspace}
 	% Set text margins to equal \tabcolsep (6pt by default)
 	\begin{adjustwidth}{\sectionheadermargin}{\sectionheadermargin}
@@ -195,32 +212,48 @@
 % Print a job entry
 \makeatletter
 
-\newenvironment{jobentry}[3]{
-	\notblank{#1}{\toggletrue{lefttitledefined}}{}
-	\notblank{#2}{\toggletrue{centertitledefined}}{}
-	\notblank{#3}{\toggletrue{righttitledefined}}{}
-	\ifboolexpr{togl {lefttitledefined} or togl {centertitledefined} or togl {righttitledefined}}{
-		\begin{tabu} to 1\textwidth { X[l,p] X[c,p] X[r,p] }
-			\textbf{#1} & & \textbf{#2} \\
-		\end{tabu}
-		\vspace*{0.5em} % added some space for aesthetics
-	}{
-		\vspace*{\afteremptysubsectionheaderspace}
-	}
-	\togglefalse{lefttitledefined}
-	\togglefalse{centertitledefined}
-	\togglefalse{righttitledefined}
-	\begin{adjustwidth}{\subsectionmargin}{\subsectionmargin}
+% Define an environment for the main job entry
+\newenvironment{jobentry}[2]{%
+    \begin{center}
+    \textbf{#1} \\ \textit{#2}\\[0.25em]
+    \end{center}
+}{%
+    \par\vspace{.5em}
 }
-{
-	\end{adjustwidth}
-	\vspace*{\aftersubsectionspace}
+
+% Position entry
+\newcommand{\jobposition}[2]{%
+    #1 \hfill #2\\[0.1em]
+}
+
+% Job description
+\newcommand{\jobdescription}[1]{%
+    \vspace{-1em}
+    {#1}
+    \vspace{0.1em}
+}
+
+% Job responsibilities
+\newenvironment{jobresponsibilities}{
+    \noindent\textbf{Responsibilities}
+    \begin{itemize}
+}{%
+    \end{itemize}
+    \vspace{0.3em}
+}
+
+% Notable projects
+\newenvironment{jobprojects}{
+    \noindent\textbf{Projects}
+    \begin{itemize}
+}{%
+    \end{itemize}
+    \vspace{0.3em}
 }
 \makeatother
-
-% Environment for the job description
-\newenvironment{jobdescription}{
-	\begin{itemize}
-}{
-	\end{itemize}
+\fancyhead{} % Clear header
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot{} % Clear footer
+\newcommand{\customfooter}{
+    \fancyfoot[C]{\today \quad Version: 1.0 \quad \\ \href{https://github.com/nebriv/resume}{Built automatically from GitHub - https://github.com/nebriv/resume}}
 }

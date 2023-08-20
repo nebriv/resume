@@ -1,3 +1,7 @@
+# Latest Resume
+You can download/view the latest version of my resume here:
+https://github.com/nebriv/resume/releases/latest/download/resume.pdf
+
 # Resume Generation
 Uses Github actions to automatically build different versions (based off of branches) of my resume. The intention is to have one "main" version (main branch) that can then be pulled from to create more specific resume versions as the need arises.
 
