@@ -15,6 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Install missing LaTeX packages
+        run: |
+          tlmgr update --self
+          tlmgr install tabu
+
       - name: Build resume
         run: lualatex resume.tex
 
@@ -31,11 +36,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Install missing LaTeX packages
-        run: |
-          tlmgr update --self
-          tlmgr install tabu
 
       - name: Download resume.pdf
         uses: actions/download-artifact@v2
