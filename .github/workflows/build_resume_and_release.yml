@@ -62,7 +62,7 @@ jobs:
       - name: Release
         uses: ncipollo/release-action@v1
         with:
-          tag: resume-${{ steps.extract_info.outputs.branch }}-${{ needs.bump_version.outputs.new_tag }}
+          tag: resume-${{ steps.extract_info.outputs.branch }}-${{ needs.bump_version.outputs.tag }}
           artifacts: "./resume.pdf"
           body: "Release of the updated resume"
           token: ${{ secrets.GITHUB_TOKEN }}
