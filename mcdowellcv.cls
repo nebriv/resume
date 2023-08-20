@@ -163,6 +163,7 @@
 \newtoggle{centertitledefined}
 \newtoggle{righttitledefined}
 
+
 \newenvironment{cvsubsection}[4][1]{
 	\notblank{#2}{\toggletrue{lefttitledefined}}{}
 	\notblank{#3}{\toggletrue{centertitledefined}}{}
@@ -190,3 +191,40 @@
 	\vspace*{\aftersubsectionspace}
 }
 \makeatother
+
+% Print a job entry
+\makeatletter
+% Define toggles checking if titles were defined
+\newtoggle{lefttitledefined}
+\newtoggle{centertitledefined}
+\newtoggle{righttitledefined}
+
+\newenvironment{jobentry}[3]{
+	\notblank{#1}{\toggletrue{lefttitledefined}}{}
+	\notblank{#2}{\toggletrue{centertitledefined}}{}
+	\notblank{#3}{\toggletrue{righttitledefined}}{}
+	\ifboolexpr{togl {lefttitledefined} or togl {centertitledefined} or togl {righttitledefined}}{
+		\begin{tabu} to 1\textwidth { X[l,p] X[c,p] X[r,p] }
+			\textbf{#1} & & \textbf{#2} \\
+		\end{tabu}
+		\vspace*{0.5em} % added some space for aesthetics
+	}{
+		\vspace*{\afteremptysubsectionheaderspace}
+	}
+	\togglefalse{lefttitledefined}
+	\togglefalse{centertitledefined}
+	\togglefalse{righttitledefined}
+	\begin{adjustwidth}{\subsectionmargin}{\subsectionmargin}
+}
+{
+	\end{adjustwidth}
+	\vspace*{\aftersubsectionspace}
+}
+\makeatother
+
+% Environment for the job description
+\newenvironment{jobdescription}{
+	\begin{itemize}
+}{
+	\end{itemize}
+}
