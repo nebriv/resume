@@ -34,6 +34,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
 
       - name: Download resume.pdf
         uses: actions/download-artifact@v2
@@ -43,7 +48,7 @@ jobs:
       - name: Release
         uses: ncipollo/release-action@v1
         with:
-          tag: commit-${{ github.sha }}
+          tag: resume-${{ steps.extract_branch.outputs.branch }}-${{ github.ref_name }}
           artifacts: "./resume.pdf"
           body: "Release of the updated resume"
           token: ${{ secrets.GITHUB_TOKEN }}
