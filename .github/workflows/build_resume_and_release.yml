@@ -31,6 +31,15 @@ jobs:
       - name: Build resume
         run: lualatex resume.tex
 
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: .  # This will take all the content in the current directory. We'll exclude unnecessary files in the next step.
+          force_orphan: true  # This will keep only the latest commit in the gh-pages branch, making it cleaner.
+          path: resume.pdf  # Here we specify the exact file to publish
+
       - name: Release
         uses: ncipollo/release-action@v1
         with:
