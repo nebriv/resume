@@ -20,52 +20,41 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-    % The font could be set to Windows-specific Calibri by using the 'calibri' option
-    \documentclass[]{mcdowellcv}
+% The font could be set to Windows-specific Calibri by using the 'calibri' option
+\documentclass[]{mcdowellcv}
 
-    % For mathematical symbols
-    \usepackage{amsmath}
+% For mathematical symbols
+\usepackage{amsmath}
 
-    
-      % Set applicant's personal data for header
-      \name{Ben Virgilio}
-      \address{New York, New York}
-      \contacts{ben@benvirgilio.com \linebreak https://benvirgilio.com}
-    
 
-    \begin{document}
+% Set applicant's personal data for header
+\name{John  Doe}
+\address{New York, New York}
+\contacts{john@johndoe.com \linebreak https://johndoe.com}
+
+
+\begin{document}
 % Print the header
 \makeheader
 
 \begin{cvsection}{Experience}
 
-    \begin{jobentry}{American Museum of Natural History}{New York, New York}
-    \begin{jobpositions}
-        \jobposition{Cybersecurity Manager}{May 2022 - Present}
-        \jobposition{Senior Security Engineer}{August 2017 - May 2022}
-        \jobposition{Security Engineer}{February 2016 - August 2017}
-    \end{jobpositions}
-        \jobdescription{Led the growth of a small cyber security program at a globally recognized Museum and research
-    institution. Accomplishments include the development of a risk driven vulnerability management
-    program, incident response procedures, compliance and alignment with numerous security
-    frameworks and the migration of aging network security infrastructure. Balancing security
-    fundamentals with research and education requirements.}
+
+    \begin{jobentry}{The Best Job Ever}{New York, New York}
+        \jobposition{Manager}{June 2020 - Present}
+        \jobposition{Intern}{July 2017 - June 2020}
+        
+        \jobdescription{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu felis porttitor, fermentum odio vel, varius est. Sed ipsum elit, condimentum at mattis dapibus, interdum quis ipsum. Aliquam efficitur risus nec efficitur placerat. Integer interdum nisi in malesuada imperdiet. Sed id augue sem. Quisque elementum tristique cursus. Ut porta tincidunt tortor, blandit finibus erat congue nec. Etiam neque sem, sodales sit amet metus eu, ornare dictum justo. Donec vitae mi ac ligula semper cursus. Fusce id dui venenatis elit viverra mollis. Donec congue condimentum interdum. Vivamus varius egestas suscipit. Vestibulum pretium, nunc sit amet tincidunt imperdiet, orci leo accumsan elit, et accumsan tellus est ut leo. Donec vitae feugiat lectus, non tempus ex.}
         
         \begin{jobresponsibilities}
-            \item Monitor, triage, and respond to security incidents using an array of in-house and off the
-    shelf tools
-            \item Produce and implement Strategic Security Plans
-            \item Maintain and audit network security access control (Cisco Catalyst ACLs and Cisco
-    Firepower/ASAs) and monitoring devices (Security Onion/Surricata/Zeek)
+            \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec laoreet. 
+            \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse cursus.
+            \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan.
         \end{jobresponsibilities}
         
         \begin{jobprojects}
-            \item Supported the deployment of an NSF Grant Funded (Award \#1827153) Science DMZ
-    network, a high-speed network designed to support the transfer and management of high-
-    volume scientific research data. Responsible for the development and implementation of
-    low impact highly effective security measures
-            \item Overhauled and deployed network access control including the use of certificate based
-    802.1x authentication
+            \item Sed et sollicitudin mauris, quis malesuada sem. Cras augue dui, convallis quis interdum quis, consequat vitae erat. Praesent malesuada sapien.
+            \item Phasellus maximus, nunc vitae hendrerit tempor, nisl est accumsan magna, sed volutpat lacus risus non felis. Mauris dolor urna, viverra.
         \end{jobprojects}
     \end{jobentry}
 
@@ -76,20 +65,16 @@
         \end{jobpositions}
 
         
-        \begin{jobresponsibilities}
-            \item Assess network infrastructure and design, Active Directory security and account
-management processes, and overall patch management procedures
-            \item Execute penetration tests using Metasploit Framework, BurpSuite, Responder and other
-industry recognized tools
-            \item Interview clients to understand security culture, risks and concerns and develop wholistic
-recommendations designed to support existing initiatives
-            \item Supported incident response engagements leveraging penetration testing methodology to
-guide triaging.
-        \end{jobresponsibilities}
+
+\begin{jobentry}{The Worst Job Ever}{New York, New York}
+        \jobposition{Intern}{January 1969 - April 2017}
         
-        \begin{jobprojects}
-            \item Developed internal tooling to support incident response investigations and security assessments
-        \end{jobprojects}
+        \jobdescription{Mauris non pretium eros. Etiam ultrices nisi nec ante euismod dapibus. Mauris et nunc mollis, feugiat risus eu, maximus ex. Curabitur ac felis ullamcorper, congue justo eu, elementum dui. Vivamus at lorem augue. Ut ullamcorper malesuada quam. Suspendisse a vulputate.}
+        
+        \begin{jobresponsibilities}
+            \item Phasellus lectus justo, eleifend ac enim et, imperdiet viverra justo.
+            \item Nam luctus blandit ante, vulputate dignissim quam. Sed aliquam quam.
+        \end{jobresponsibilities}
     \end{jobentry}
 
 
@@ -102,6 +87,15 @@ guide triaging.
         \jobdescription{Responsible for the upkeep and functionality of both the research and isolated forensics
 networks and computing environments.}
     \end{jobentry}
+
+\begin{cvsection}{Certifications}
+	\begin{cvsubsection}{}{}{}
+		\begin{itemize}
+			\setlength\itemsep{3pt}
+			\item \textbf{Aliquam erat volutpat.} \hfill July 2019 - July 2023
+			\item \textbf{Duis a lacus} \hfill September 2017
+		\end{itemize}
+	\end{cvsubsection}
 
 \end{cvsection}
 
@@ -126,13 +120,13 @@ networks and computing environments.}
 \begin{cvsection}{Skills)}
     \begin{cvsubsection}{}{}{}
         \begin{itemize}
-            \item \textbf{Cisco Products}  ASA, AnyConnect, Identity Services Engine (ISE), Umbrella, DuoSecurity
-            \item \textbf{Scripting/Programming Languages}  Python, PHP, Powershell
-            \item \textbf{Microsoft E5/A5 Solutions}  Defender for X, Entra, Sentinel, Purview
-            \item \textbf{Microsoft Azure}
-            \item \textbf{Amazon Web Services (AWS)}
-            \item \textbf{Operating Systems}  Windows Server, RHEL/CentOS, Debian/Ubuntu
-            \item \textbf{Vulnerability Scanners}  Acunetix, Tenable.io/Nessus, Qualys, BurpSuite, Metasploit, sqlMap
+            \item \textbf{Lorem Ipsum A}  Dolor, Sit, Amet, Consectetur, Adipiscing
+            \item \textbf{Lorem Ipsum B}  Elit, Sed, Do, Eiusmod, Tempor
+            \item \textbf{Lorem Ipsum C}  Incididunt, Ut, Labore, Et, Dolore
+            \item \textbf{Lorem Ipsum D}  Magna, Aliqua, Ut, Enim, Ad
+            \item \textbf{Lorem Ipsum E}  Minim, Veniam, Quis, Nostrud, Exercitation
+            \item \textbf{Lorem Ipsum F}  Ullamco, Laboris, Nisi, Ut, Aliquip
+            \item \textbf{Lorem Ipsum G}  Ex, Ea, Commodo, Consequat, Duis
         \end{itemize}
     \end{cvsubsection}
 \end{cvsection}
