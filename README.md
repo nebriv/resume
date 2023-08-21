@@ -12,4 +12,4 @@ The thought is to hopefully push out the generated PDFs to wherever I have my re
 # Sauce
 Original resume generated via https://resumake.io. It looks like the template was originally sourced from here: https://github.com/dnl-blkv/mcdowell-cv
 
-I chose this template is it most closely resembled my current resume. Perhaps in the future I'll dress it up a bit or get ambitious and craft my own template.
+I chose this template as it most closely resembled my current resume, I've made a few modifications from the original to include some other sections and improve the spacing.

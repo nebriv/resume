@@ -22,7 +22,12 @@ jobs:
           default_bump: patch
           tag_prefix: "resume-${{ github.ref_name }}-"
           release_branches: ".*"
-
+      
+      - name: Update Version in Resume
+        run: |
+          NEW_VERSION="${{ steps.bump_version.outputs.new_tag }}"
+          sed -i "s/VERSIONTAGPLACEHOLDER/${NEW_VERSION}/g" *.cls
+          
       - name: Build resume
         run: lualatex resume.tex
 
@@ -33,3 +38,17 @@ jobs:
           artifacts: "./resume.pdf"
           body: "Release of the updated resume"
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Rename PDF to include branch name
+        run: |
+          mkdir publish
+          mv resume.pdf publish/${{ github.ref_name }}-resume.pdf
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./publish
+          force_orphan: true  # This will keep only the latest commit in the gh-pages branch, making it cleaner.
+
