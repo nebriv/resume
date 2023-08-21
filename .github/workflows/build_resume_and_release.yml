@@ -40,16 +40,15 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Rename PDF to include branch name
-        run: mv resume.pdf ${{ github.ref_name }}-resume.pdf
-
-      - name: Debug
-        run: ls -la
+        run: |
+          mkdir publish
+          mv resume.pdf publish/${{ github.ref_name }}-resume.pdf
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: .  # This will take all the content in the current directory.
+          publish_dir: ./publish
           force_orphan: true  # This will keep only the latest commit in the gh-pages branch, making it cleaner.
-          path: ${{ github.ref_name }}-resume.pdf  # Here we specify the renamed file to publish
+
