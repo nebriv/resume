@@ -39,16 +39,29 @@ jobs:
           body: "Release of the updated resume"
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Upload resume.pdf
+        uses: actions/upload-artifact@v2
+        with:
+          name: resume-artifact
+          path: resume.pdf
+
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+
+      - name: Download resume.pdf
+        uses: actions/download-artifact@v2
+        with:
+          name: resume-artifact
+
       - name: Rename PDF to include branch name
         run: |
-          mkdir publish
-          mv resume.pdf publish/${{ github.ref_name }}-resume.pdf
+          mv resume.pdf ${{ github.ref_name }}-resume.pdf
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./publish
-          force_orphan: true  # This will keep only the latest commit in the gh-pages branch, making it cleaner.
-
+          publish_dir: .
