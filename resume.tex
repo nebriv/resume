@@ -36,14 +36,15 @@
     \begin{document}
 % Print the header
 \makeheader
-      
 
 \begin{cvsection}{Experience}
 
     \begin{jobentry}{American Museum of Natural History}{New York, New York}
-        \jobposition{Cybersecurity Manager}{June 2015 - June 2017}
-        \jobposition{Senior Cybersecurity Engineer}{July 2017 - Present}
-        
+    \begin{jobpositions}
+        \jobposition{Cybersecurity Manager}{May 2022 - Present}
+        \jobposition{Senior Security Engineer}{August 2017 - May 2022}
+        \jobposition{Security Engineer}{February 2016 - August 2017}
+    \end{jobpositions}
         \jobdescription{Led the growth of a small cyber security program at a globally recognized Museum and research
     institution. Accomplishments include the development of a risk driven vulnerability management
     program, incident response procedures, compliance and alignment with numerous security
@@ -68,68 +69,85 @@
         \end{jobprojects}
     \end{jobentry}
 
-\begin{jobentry}{Stroz Friedberg}{New York, New York}
-        \jobposition{Cybersecurity Manager}{June 2015 - June 2017}
-        \jobposition{Senior Cybersecurity Engineer}{July 2017 - Present}
-        
-        \jobdescription{Led the growth of a small cyber security program at a globally recognized Museum and research
-    institution. Accomplishments include the development of a risk driven vulnerability management
-    program, incident response procedures, compliance and alignment with numerous security
-    frameworks and the migration of aging network security infrastructure. Balancing security
-    fundamentals with research and education requirements.}
+    \begin{jobentry}{Stroz Friedberg}{New York, New York}
+        \begin{jobpositions}
+            \jobposition{Associate}{January 2015 - February 2016}
+            \jobposition{Analyst}{June 2014 - January 2015}
+        \end{jobpositions}
+
         
         \begin{jobresponsibilities}
-            \item Monitor, triage, and respond to security incidents using an array of in-house and off the
-    shelf tools
-            \item Produce and implement Strategic Security Plans
-            \item Maintain and audit network security access control (Cisco Catalyst ACLs and Cisco
-    Firepower/ASAs) and monitoring devices (Security Onion/Surricata/Zeek)
+            \item Assess network infrastructure and design, Active Directory security and account
+management processes, and overall patch management procedures
+            \item Execute penetration tests using Metasploit Framework, BurpSuite, Responder and other
+industry recognized tools
+            \item Interview clients to understand security culture, risks and concerns and develop wholistic
+recommendations designed to support existing initiatives
+            \item Supported incident response engagements leveraging penetration testing methodology to
+guide triaging.
         \end{jobresponsibilities}
         
         \begin{jobprojects}
-            \item Supported the deployment of an NSF Grant Funded (Award \#1827153) Science DMZ
-    network, a high-speed network designed to support the transfer and management of high-
-    volume scientific research data. Responsible for the development and implementation of
-    low impact highly effective security measures
-            \item Overhauled and deployed network access control including the use of certificate based
-    802.1x authentication
+            \item Developed internal tooling to support incident response investigations and security assessments
         \end{jobprojects}
+    \end{jobentry}
+
+
+    \begin{jobentry}{Senator Patrick Leahy Center for Digital Investigation}{Burlington, Vermont}
+        \begin{jobpositions}
+            \jobposition{Lead Network Administrator}{September 2013 - June 2014}
+        \end{jobpositions}
+        
+        
+        \jobdescription{Responsible for the upkeep and functionality of both the research and isolated forensics
+networks and computing environments.}
     \end{jobentry}
 
 \end{cvsection}
 
-
-\begin{cvsection}{Certifications}
-	\begin{cvsubsection}{}{}{}
-		\begin{itemize}
-			\setlength\itemsep{3pt}
-			\item \textbf{CompTIA Security+ Certified} \hfill July 2019 - July 2023
-			\item \textbf{GIAC Continuous Monitoring} \hfill September 2017
-		\end{itemize}
-	\end{cvsubsection}
+\begin{cvsection}{Education}
+    \begin{cvsubsection}{Burlington, VT}{Champlain College}{2010 | 2014}
+        \vspace{-1em}Bachelor of Science Degree in Computer Networking and Information Security\\
+        \hspace*{1em}With Minor in Computer and Digital Forensics
+    \end{cvsubsection}
 \end{cvsection}
 
-\begin{cvsection}{Projects}
+\begin{cvsection}{Project Highlights}
     \begin{cvsubsection}{}{}{}
+        Most of my work can be found on \href{https://github.com/nebriv/}{my github account https://github.com/nebriv/}, but there are a few projects I wanted to highlight.\\
         \begin{itemize}
             \setlength\itemsep{3pt}
-            \item \textbf{Test} (https://github.com)  Test tetst
+            \item \textbf{This Resume!} (https://github.com/nebriv/resume/)\\While all resumes are a bit of project, I heeded many a peers advice and built out this resume using LaTeX. I then took it a bit further and developed a little Github action workflow to automatically build a PDF. This allows for multiple different versions of content, and should provide a good history.
+            \item \textbf{VTOLVR-Mods} (https://vtolvr-mods.com)\\Developed python backend to allowing mod creators to upload their mod packages to a central location accessible by the modloader platform. Backend site utilizes a RESTful API, numerous integrations with Steam, Discord and others, as well as full administration and moderation utilizes.
         \end{itemize}
     \end{cvsubsection}
 \end{cvsection}
 
-\begin{cvsection}{Skills (Keyword Fluff ;)}
+\begin{cvsection}{Skills)}
     \begin{cvsubsection}{}{}{}
         \begin{itemize}
             \item \textbf{Cisco Products}  ASA, AnyConnect, Identity Services Engine (ISE), Umbrella, DuoSecurity
             \item \textbf{Scripting/Programming Languages}  Python, PHP, Powershell
             \item \textbf{Microsoft E5/A5 Solutions}  Defender for X, Entra, Sentinel, Purview
-            \item \textbf{Microsoft Azure}  Defender for X, Entra, Sentinel, Purview
-            \item \textbf{Amazon Web Services (AWS)}  Defender for X, Entra, Sentinel, Purview
+            \item \textbf{Microsoft Azure}
+            \item \textbf{Amazon Web Services (AWS)}
             \item \textbf{Operating Systems}  Windows Server, RHEL/CentOS, Debian/Ubuntu
             \item \textbf{Vulnerability Scanners}  Acunetix, Tenable.io/Nessus, Qualys, BurpSuite, Metasploit, sqlMap
         \end{itemize}
     \end{cvsubsection}
 \end{cvsection}
+
+\begin{cvsection}{Certifications}
+	\begin{cvsubsection}{}{}{}
+		\begin{itemize}
+			\setlength\itemsep{3pt}
+			\item \textbf{CompTIA Security+ Certified} \hfill July 2013 – July 2016
+			\item \textbf{GIAC Continuous Monitoring} \hfill  September 2017 – Present
+            \item \textbf{GIAC Defensible Security Architecture} \hfill  October 2021 – Present
+            \item \textbf{GIAC Public Cloud Security October} \hfill  2022 – Present
+		\end{itemize}
+	\end{cvsubsection}
+\end{cvsection}
+
 \customfooter
 \end{document}

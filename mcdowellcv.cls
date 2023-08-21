@@ -221,14 +221,18 @@
     \par\vspace{.5em}
 }
 
-% Position entry
+
+\newlist{jobpositions}{itemize}{1}
+\setlist[jobpositions]{label={}, left=0pt, labelsep=0pt, itemsep=-0.0em, topsep=0pt, partopsep=0pt, parsep=0pt}
+
+% Position entry with itemize
 \newcommand{\jobposition}[2]{%
-    #1 \hfill #2\\[0.1em]
+    \item \makebox[\linewidth][s]{#1 \hfill #2}
 }
 
 % Job description
 \newcommand{\jobdescription}[1]{%
-    \vspace{-1em}
+    % \noindent\textbf{Summary}\\
     {#1}
     \vspace{0.1em}
 }
