@@ -256,5 +256,5 @@
 \fancyfoot{} % Clear footer
 \newcommand{\customfooter}{
 		\setlength{\footskip}{2em}
-		\fancyfoot[C]{{\footnotesize  \today \quad Version: 1.0 \\ \href{https://github.com/nebriv/resume}{Built automatically from GitHub - https://github.com/nebriv/resume}}}
+		\fancyfoot[C]{{\footnotesize  \today \quad VERSIONTAGPLACEHOLDER \\ \href{https://github.com/nebriv/resume}{Built automatically from GitHub - https://github.com/nebriv/resume}}}
 }
