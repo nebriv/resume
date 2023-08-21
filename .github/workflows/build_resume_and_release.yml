@@ -22,7 +22,12 @@ jobs:
           default_bump: patch
           tag_prefix: "resume-${{ github.ref_name }}-"
           release_branches: ".*"
-
+      
+      - name: Update Version in Resume
+        run: |
+          NEW_VERSION="${{ steps.bump_version.outputs.new_tag }}"
+          sed -i "s/VERSIONTAGPLACEHOLDER/${NEW_VERSION}/g" *.cls
+          
       - name: Build resume
         run: lualatex resume.tex
 
