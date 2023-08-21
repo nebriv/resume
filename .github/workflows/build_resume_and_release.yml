@@ -14,6 +14,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set up GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y software-properties-common
+          sudo add-apt-repository -y ppa:cli/cli
+          sudo apt-get update
+          sudo apt-get install -y gh git
+
       - name: Bump version and push tag
         id: bump_version
         uses: mathieudutour/github-tag-action@v6.1
@@ -31,15 +39,6 @@ jobs:
       - name: Build resume
         run: lualatex resume.tex
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: .  # This will take all the content in the current directory. We'll exclude unnecessary files in the next step.
-          force_orphan: true  # This will keep only the latest commit in the gh-pages branch, making it cleaner.
-          path: resume.pdf  # Here we specify the exact file to publish
-
       - name: Release
         uses: ncipollo/release-action@v1
         with:
@@ -47,3 +46,15 @@ jobs:
           artifacts: "./resume.pdf"
           body: "Release of the updated resume"
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Rename PDF to include branch name
+        run: mv resume.pdf ${{ github.ref_name }}-resume.pdf
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: .  # This will take all the content in the current directory.
+          force_orphan: true  # This will keep only the latest commit in the gh-pages branch, making it cleaner.
+          path: ${{ github.ref_name }}-resume.pdf  # Here we specify the renamed file to publish
