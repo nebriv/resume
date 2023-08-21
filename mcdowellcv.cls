@@ -50,7 +50,7 @@
 \usepackage{etoolbox} 
 \usepackage{fancyhdr}
 
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 
 % Suppress page numbers
 \pagestyle{empty} 
@@ -255,5 +255,6 @@
 \renewcommand{\headrulewidth}{0pt}
 \fancyfoot{} % Clear footer
 \newcommand{\customfooter}{
-    \fancyfoot[C]{\today \quad Version: 1.0 \quad \\ \href{https://github.com/nebriv/resume}{Built automatically from GitHub - https://github.com/nebriv/resume}}
+		\setlength{\footskip}{2em}
+		\fancyfoot[C]{{\footnotesize  \today \quad Version: 1.0 \\ \href{https://github.com/nebriv/resume}{Built automatically from GitHub - https://github.com/nebriv/resume}}}
 }
