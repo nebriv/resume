@@ -79,7 +79,8 @@
 
 \usepackage{needspace}
 
-
+% \hyphenpenalty=10000
+% \exhyphenpenalty=10000
 
 \DeclareMicrotypeSet*{smallcapsi} { 
 	encoding = {OT1,T1,T2A,LY1,OT4,QX,T5,TS1,EU1,EU2},
@@ -102,6 +103,21 @@
 \def\aftersubsectionspace{3pt}
 
 
+\newcommand{\MONTH}{%
+  \ifcase\the\month
+  \or January% 1
+  \or February% 2
+  \or March% 3
+  \or April% 4
+  \or May% 5
+  \or June% 6
+  \or July% 7
+  \or August% 8
+  \or September% 9
+  \or October% 10
+  \or November% 11
+  \or December% 12
+  \fi}
 
 %--------------------------------------------------------------------------------
 %                            Header Setup and Printing                          -
@@ -239,26 +255,37 @@
 
 % Job responsibilities
 \newenvironment{jobresponsibilities}{
+		\begin{raggedright}
     \noindent\textbf{Responsibilities}
     \begin{itemize}
 }{%
     \end{itemize}
+    \end{raggedright}
     \vspace{0.3em}
 }
 
 % Notable projects
 \newenvironment{jobprojects}{
-    \noindent\textbf{Projects}
+		\begin{raggedright}
+    \noindent\textbf{Notable Projects}
     \begin{itemize}
 }{%
     \end{itemize}
+    \end{raggedright}
     \vspace{0.3em}
 }
 \makeatother
 \fancyhead{} % Clear header
 \renewcommand{\headrulewidth}{0pt}
 \fancyfoot{} % Clear footer
+\thispagestyle{empty}
+\fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
 \newcommand{\customfooter}{
-		\setlength{\footskip}{2em}
-		\fancyfoot[C]{{\footnotesize  \today \quad VERSIONTAGPLACEHOLDER \\ \href{https://github.com/nebriv/resume}{Built automatically from GitHub - https://github.com/nebriv/resume}}}
-}
+		\setlength{\footskip}{1em}
+		\fancyfoot[C]{
+			{\footnotesize \quad Ben Virgilio - VERSIONTAGPLACEHOLDER - \MONTH \ \the\year
+				\\ \href{https://github.com/nebriv/resume}{Built from GitHub - https://github.com/nebriv/resume}
+				\\ Page \thepage\ of \pageref{LastPage}
+			}
+		}
+} 

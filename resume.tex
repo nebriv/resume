@@ -20,20 +20,20 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-    % The font could be set to Windows-specific Calibri by using the 'calibri' option
-    \documentclass[]{mcdowellcv}
+% The font could be set to Windows-specific Calibri by using the 'calibri' option
+\documentclass[]{mcdowellcv}
 
-    % For mathematical symbols
-    \usepackage{amsmath}
+% For mathematical symbols
+\usepackage{amsmath}
 
-    
-      % Set applicant's personal data for header
-      \name{Ben Virgilio}
-      \address{New York, New York}
-      \contacts{ben@benvirgilio.com \linebreak https://benvirgilio.com}
-    
 
-    \begin{document}
+  % Set applicant's personal data for header
+  \name{Ben Virgilio}
+  \address{New York, New York}
+  \contacts{ben@benvirgilio.com \linebreak https://benvirgilio.com}
+
+
+\begin{document}
 % Print the header
 \makeheader
 
@@ -45,18 +45,16 @@
         \jobposition{Senior Security Engineer}{August 2017 - May 2022}
         \jobposition{Security Engineer}{February 2016 - August 2017}
     \end{jobpositions}
-        \jobdescription{Led the growth of a small cyber security program at a globally recognized Museum and research
-    institution. Accomplishments include the development of a risk driven vulnerability management
-    program, incident response procedures, compliance and alignment with numerous security
-    frameworks and the migration of aging network security infrastructure. Balancing security
-    fundamentals with research and education requirements.}
+        \jobdescription{Led the development of the cybersecurity program at a globally recognized research and educational institution. Established layered defenses with a focus on enhanced visibility and rapid detection, adopting new and well established technologies and methodologies. Prioritized strategic, impactful security measures that both safeguarded and supported the institution’s primary focus on research and education. These foundational security initiatives empowered the museum to safely extend its global reach and influence.}
         
         \begin{jobresponsibilities}
-            \item Monitor, triage, and respond to security incidents using an array of in-house and off the
-    shelf tools
-            \item Produce and implement Strategic Security Plans
-            \item Maintain and audit network security access control (Cisco Catalyst ACLs and Cisco
-    Firepower/ASAs) and monitoring devices (Security Onion/Surricata/Zeek)
+            \item Formulate and oversee the institution's cybersecurity strategy, ensuring a balance between security measures and the organization's core focus on research and education.
+            \item Continuously assess potential security risks and implement measures to mitigate vulnerabilities across on-premises infrastructure, cloud platforms, and vendor solutions.
+            \item Architect and deploy a multi-tiered security approach, incorporating both traditional defenses like network-based IDS and advanced deceptive measures. This strategy aims to enhance detection speed, increase system-wide visibility, and proactively identify potential breaches in their earliest stages.
+            \item Lead the institution's response to cybersecurity incidents, coordinating rapid detection, containment, and remediation efforts.
+            \item Influence the selection, deployment, and effective use of security technologies and tools in alignment with the institution's objectives.
+            \item Assist the CISO in the development, review, and refinement of cybersecurity policies and procedures. Ensure alignment with relevant regulations and security frameworks, and facilitate security audits, liaising with auditors as required.
+            \item Engage with senior management, departments, and external industry entities, facilitating effective communication and collaboration on security matters. Participate in the Information Sharing and Analysis Center (ISAC) specific to educational institutions.
         \end{jobresponsibilities}
         
         \begin{jobprojects}
@@ -64,8 +62,14 @@
     network, a high-speed network designed to support the transfer and management of high-
     volume scientific research data. Responsible for the development and implementation of
     low impact highly effective security measures
-            \item Overhauled and deployed network access control including the use of certificate based
-    802.1x authentication
+            \item Spearheaded the integration of 802.1x EAP-TLS authentication, complemented by the implementation of Single Sign-On (SSO), advanced Identity and Access Management (IAM), and Azure Conditional Access. Further fortified user access controls through the deployment of DuoSecurity's Multi-Factor Authentication (MFA) and FIDO2 tokens, anchoring the institution's move toward a holistic zero-trust framework.
+            \item Optimized and fortified Google Workspace according to best practices.
+            \item Authored over 60 internal code repositories in GitLab, comprised of tools for operations, incident investigation, IOC automation, SIEM mailbox monitoring, data redaction, and more. Leveraging CI/CD for risk-reduced deployment of detection and prevention strategies.
+            \item Transitioned legacy ASA firewalls to a more agile and robust multi-context high-availability cluster. Additionally, introduced cloud-based firewalls, facilitating the secure migration of essential business processes to cloud infrastructures, offering scalability and adaptability to emerging threats.
+            \item Introduced custom advanced hunting rules in Defender for tailored business detections. Designed rules to detect and counter sophisticated phishing campaigns.
+            \item Conceptualized and built an internal Security Operations using open-source platforms, enhancing the institution's threat monitoring and incident response capabilities. Incorporated a cloud solution to streamline on-call rotations, triaging, and notifications. This platform's versatility was recognized and expanded to address system operations beyond just cybersecurity needs.
+            \item Led the evolution of the institution's centralized logging capabilities by implementing an ELK stack. Directed the integration of diverse log sources, including servers, network hardware, cloud services, and more. Developed unit testing for specific log capture capabilities to valid capabilities across system upgrades and changes. Strategically developed alerts based on data collected from previous penetration tests, bolstering detection and proactive response to potential attack vectors.
+            \item Developed a tailored cybersecurity training curriculum, complemented by controlled phishing tests to gauge and enhance employee threat awareness. This initiative led to heightened user vigilance, evidenced by the successful detection and reporting of sophisticated phishing campaigns.
         \end{jobprojects}
     \end{jobentry}
 
@@ -77,18 +81,17 @@
 
         
         \begin{jobresponsibilities}
-            \item Assess network infrastructure and design, Active Directory security and account
-management processes, and overall patch management procedures
-            \item Execute penetration tests using Metasploit Framework, BurpSuite, Responder and other
-industry recognized tools
-            \item Interview clients to understand security culture, risks and concerns and develop wholistic
-recommendations designed to support existing initiatives
-            \item Supported incident response engagements leveraging penetration testing methodology to
-guide triaging.
+            \item Conducted comprehensive security assessments, emphasizing a holistic approach that not only identified technical vulnerabilities but also systemic issues rooted in organizational politics and culture.
+            \item Executed penetration tests on wireless, physical infrastructure, servers, and web apps with tools like Metasploit, BurpSuite, and Responder. Highlighted how vulnerabilities were chained together to escalate from unprivileged access on local networks to server and domain admin roles.
+            \item Presented technical findings to C-suite, translating complex vulnerabilities into actionable insights. Collaborated with client technical teams to prioritize and tailor solutions, ensuring recommendations fit their unique environment and needs.
+            \item Supported major incident response engagements, leveraging pentest experience to provide detailed roadmaps of potential attack vectors and vulnerabilities.
+            \item Engaged in reverse engineering of zero-day vulnerabilities identified during assessments, subsequently reporting findings to relevant vendors for mitigation.
         \end{jobresponsibilities}
         
         \begin{jobprojects}
-            \item Developed internal tooling to support incident response investigations and security assessments
+            \item Developed internal scripts to assess client Active Directory environments for vulnerabilities. These scripts facilitated rapid, accurate, and repeatable insights into the health of the client's systems, predicting broader infrastructural challenges. Automatically generated actionable reporting data, significantly enhancing the efficiency of final client report preparations.
+            \item Developed internal tooling to support incident response investigations and security assessments.
+            \item Assisted in the deployment of a portable log analytics system, streamlining forensic and incident response investigations.
         \end{jobprojects}
     \end{jobentry}
 
