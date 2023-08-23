@@ -4,9 +4,32 @@ on:
   push:
     branches: 
       - '**'
-
+    paths:
+      - '**.tex'
+      - '**.cls'
 jobs:
+  spell_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install aspell dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y aspell
+
+      - name: Check spelling in .tex file
+        run: |
+          misspelled_words=$(aspell --mode=tex --personal=./custom_dict.txt list < resume.tex)
+          if [ ! -z "$misspelled_words" ]; then
+            echo "Found misspelled words:"
+            echo "$misspelled_words"
+            exit 1
+          fi
+
   build_tag_release:
+    needs: spell_check
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/nebriv/docker-lualatex:master
