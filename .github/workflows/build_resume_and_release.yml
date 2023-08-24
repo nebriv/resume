@@ -7,6 +7,8 @@ on:
     paths:
       - '**.tex'
       - '**.cls'
+      - 'custom_dict.txt'
+
 jobs:
   spell_check:
     runs-on: ubuntu-latest
