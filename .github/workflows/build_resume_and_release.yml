@@ -32,7 +32,7 @@ jobs:
           echo '<dictionary name="en" description="Custom dictionary for resume" case-sensitive="yes">' >> custom_dict.xml
           while IFS= read -r word; do
               echo "  <word>${word}</word>" >> custom_dict.xml
-          done < custom_words.txt
+          done < custom_dict.txt
           echo '</dictionary>' >> custom_dict.xml
 
       - name: Check grammar and spelling with LanguageTool CLI
