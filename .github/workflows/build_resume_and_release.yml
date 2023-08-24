@@ -26,12 +26,22 @@ jobs:
           unzip LanguageTool-stable.zip
           chmod +x LanguageTool-*/languagetool-commandline.jar
 
+      - name: Generate custom dictionary XML
+        run: |
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > custom_dict.xml
+          echo '<dictionary name="en" description="Custom dictionary for resume" case-sensitive="yes">' >> custom_dict.xml
+          while IFS= read -r word; do
+              echo "  <word>${word}</word>" >> custom_dict.xml
+          done < custom_words.txt
+          echo '</dictionary>' >> custom_dict.xml
+
       - name: Check grammar and spelling with LanguageTool CLI
         run: |
+          disabled_rules=$(paste -sd, <disabled_rules.txt)
           for file in $(find . -name "*.tex"); do
             output_file="${file%.tex}.txt"
             pandoc -f latex -t plain $file -o $output_file
-            if ! java -jar LanguageTool-*/languagetool-commandline.jar -l en-US $output_file | tee lt_output.txt | grep -q "^No errors were found."; then
+            if ! java -jar LanguageTool-*/languagetool-commandline.jar -l en-US --disable $disabled_rules --userconfig custom_dict.xml $output_file | tee lt_output.txt | grep -q "^No errors were found."; then
               echo "Errors found in $file"
               exit 1
             fi
