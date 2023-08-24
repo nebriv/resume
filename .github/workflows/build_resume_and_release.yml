@@ -21,9 +21,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y aspell
 
+      - name: Create custom dictionary
+        run: aspell --lang=en create master ./custom_dict.pws < custom_dict.txt
+
       - name: Check spelling in .tex file
         run: |
-          misspelled_words=$(aspell --ignore-case --mode=tex --personal=./custom_dict.txt list < resume.tex)
+          misspelled_words=$(aspell --lang=en --ignore-case --mode=tex --personal=./custom_dict.pws list < resume.tex)
           if [ ! -z "$misspelled_words" ]; then
             echo "Found misspelled words:"
             echo "$misspelled_words"
