@@ -21,12 +21,28 @@ jobs:
 
       - name: Check spelling in .tex file
         run: |
-          misspelled_words=$(aspell --mode=tex --personal=./custom_dict.txt list < resume.tex)
+          misspelled_words=$(aspell --ignore-case --mode=tex --personal=./custom_dict.txt list < resume.tex)
           if [ ! -z "$misspelled_words" ]; then
             echo "Found misspelled words:"
             echo "$misspelled_words"
             exit 1
           fi
+
+      - name: Install ChkTeX
+        run: sudo apt-get install chktex
+
+      - name: Run ChkTeX
+        run: chktex *.tex
+
+      - name: Check with TeXtidote and generate Markdown report
+        run: |
+          docker run -v $PWD:/documents sylvainhalle/textidote --check en --output md resume.tex > textidote_report.md
+
+      - name: Upload TeXtidote report
+        uses: actions/upload-artifact@v2
+        with:
+          name: tex-report
+          path: textidote_report.md
 
   build_tag_release:
     needs: spell_check
