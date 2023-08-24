@@ -8,7 +8,7 @@ on:
       - '**.tex'
       - '**.cls'
       - 'custom_dict.txt'
-      - '*.yml'
+    workflow_dispatch:
 
 jobs:
   spell_check:
