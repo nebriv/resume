@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  spell_check:
+  check_grammar:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -20,20 +20,35 @@ jobs:
       - name: Install pandoc
         run: sudo apt-get install -y pandoc
 
+      - name: Download and Setup LanguageTool
+        run: |
+          wget https://languagetool.org/download/LanguageTool-stable.zip
+          unzip LanguageTool-stable.zip
+          chmod +x LanguageTool-*/languagetool-commandline.jar
 
-      - name: Check grammar and spelling with LanguageTool
+      - name: Check grammar and spelling with LanguageTool CLI
         run: |
           for file in $(find . -name "*.tex"); do
-            plaintext=$(pandoc -f latex -t plain $file)
-            echo $plaintext
-            curl --data "language=en-US&text=$plaintext" https://api.languagetool.org/v2/check > result.json
-            # Check if there are any errors
-            if [ "$(cat result.json | jq '.matches | length')" -ne 0 ]; then
-              cat result.json | jq '.matches[] | .message'
+            output_file="${file%.tex}.txt"
+            pandoc -f latex -t plain $file -o $output_file
+            if ! java -jar LanguageTool-*/languagetool-commandline.jar -l en-US $output_file | tee lt_output.txt | grep -q "^No errors were found."; then
               echo "Errors found in $file"
               exit 1
             fi
           done
+
+      - name: Save LanguageTool Output
+        if: failure() # Only save the output if there was an error.
+        run: |
+          mkdir lt_outputs
+          mv lt_output.txt lt_outputs/
+
+      - name: Upload LanguageTool Output for Review
+        if: failure() # Only upload the output if there was an error.
+        uses: actions/upload-artifact@v2
+        with:
+          name: languagetool-outputs
+          path: lt_outputs/
 
       - name: Install ChkTeX
         run: sudo apt-get install chktex
@@ -50,6 +65,13 @@ jobs:
         with:
           name: tex-report
           path: textidote_report.md
+
+  manual_review:
+    needs: check_grammar
+    runs-on: ubuntu-latest
+    environment: review_required
+    steps:
+      - run: echo "Awaiting manual review of LanguageTool output"
 
   build_tag_release:
     needs: spell_check
