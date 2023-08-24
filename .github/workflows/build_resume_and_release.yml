@@ -24,6 +24,7 @@ jobs:
         run: |
           for file in $(find . -name "*.tex" -o -name "*.cls"); do
             plaintext=$(detex $file)
+            echo $plaintext
             curl --data "language=en-US&text=$plaintext" https://api.languagetool.org/v2/check > result.json
             # Check if there are any errors
             if [ "$(cat result.json | jq '.matches | length')" -ne 0 ]; then
