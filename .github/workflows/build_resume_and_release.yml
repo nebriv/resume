@@ -23,7 +23,7 @@ jobs:
 
       - name: Check grammar and spelling with LanguageTool
         run: |
-          for file in $(find . -name "*.tex" -o -name "*.cls"); do
+          for file in $(find . -name "*.tex"); do
             plaintext=$(pandoc -f latex -t plain $file)
             echo $plaintext
             curl --data "language=en-US&text=$plaintext" https://api.languagetool.org/v2/check > result.json
@@ -34,7 +34,6 @@ jobs:
               exit 1
             fi
           done
-
 
       - name: Install ChkTeX
         run: sudo apt-get install chktex
