@@ -35,6 +35,9 @@ jobs:
       - name: Build resume
         run: lualatex resume.tex
 
+      - name: Build resume a second time for page numbers
+        run: lualatex resume.tex
+
       - name: Release
         uses: ncipollo/release-action@v1
         with:
