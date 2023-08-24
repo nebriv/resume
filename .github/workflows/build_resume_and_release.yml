@@ -8,6 +8,7 @@ on:
       - '**.tex'
       - '**.cls'
       - 'custom_dict.txt'
+      - '*.yml'
 
 jobs:
   spell_check:
