@@ -17,24 +17,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install aspell dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y aspell
+      - name: Install detex
+        run: sudo apt-get install -y detex
 
-      - name: Create custom dictionary
+      - name: Check grammar and spelling with LanguageTool
         run: |
-          aspell --lang=en create master ./custom_dict.pws < custom_dict.txt
-          cat ./custom_dict.pws
+          for file in $(find . -name "*.tex" -o -name "*.cls"); do
+            plaintext=$(detex $file)
+            curl --data "language=en-US&text=$plaintext" https://api.languagetool.org/v2/check > result.json
+            # Check if there are any errors
+            if [ "$(cat result.json | jq '.matches | length')" -ne 0 ]; then
+              cat result.json | jq '.matches[] | .message'
+              echo "Errors found in $file"
+              exit 1
+            fi
+          done
 
-      - name: Check spelling in .tex file
-        run: |
-          misspelled_words=$(aspell --lang=en --ignore-case --mode=tex --personal=./custom_dict.txt list < resume.tex)
-          if [ ! -z "$misspelled_words" ]; then
-            echo "Found misspelled words:"
-            echo "$misspelled_words"
-            exit 1
-          fi
 
       - name: Install ChkTeX
         run: sudo apt-get install chktex
