@@ -29,7 +29,7 @@ jobs:
 
       - name: Check spelling in .tex file
         run: |
-          misspelled_words=$(aspell --lang=en --ignore-case --mode=tex --personal=./custom_dict.pws list < resume.tex)
+          misspelled_words=$(aspell --lang=en --ignore-case --mode=tex --personal=./custom_dict.txt list < resume.tex)
           if [ ! -z "$misspelled_words" ]; then
             echo "Found misspelled words:"
             echo "$misspelled_words"
