@@ -4,6 +4,10 @@ on:
   push:
     branches: 
       - '**'
+    paths:
+      - '**.tex'
+      - '**.cls'
+  workflow_dispatch:
 
 jobs:
   build_tag_release:
