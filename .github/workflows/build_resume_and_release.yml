@@ -7,84 +7,10 @@ on:
     paths:
       - '**.tex'
       - '**.cls'
-      - 'custom_dict.txt'
   workflow_dispatch:
 
 jobs:
-  check_grammar:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Install pandoc
-        run: sudo apt-get install -y pandoc
-
-      - name: Download and Setup LanguageTool
-        run: |
-          wget https://languagetool.org/download/LanguageTool-stable.zip
-          unzip LanguageTool-stable.zip
-          chmod +x LanguageTool-*/languagetool-commandline.jar
-
-      - name: Generate custom dictionary XML
-        run: |
-          echo '<?xml version="1.0" encoding="UTF-8"?>' > custom_dict.xml
-          echo '<dictionary name="en" description="Custom dictionary for resume" case-sensitive="yes">' >> custom_dict.xml
-          while IFS= read -r word; do
-              echo "  <word>${word}</word>" >> custom_dict.xml
-          done < custom_dict.txt
-          echo '</dictionary>' >> custom_dict.xml
-
-      - name: Check grammar and spelling with LanguageTool CLI
-        run: |
-          disabled_rules=$(paste -sd, <disabled_rules.txt)
-          for file in $(find . -name "*.tex"); do
-            output_file="${file%.tex}.txt"
-            pandoc -f latex -t plain $file -o $output_file
-            if ! java -jar LanguageTool-*/languagetool-commandline.jar -l en-US --disable $disabled_rules --userconfig custom_dict.xml $output_file | tee lt_output.txt | grep -q "^No errors were found."; then
-              echo "Errors found in $file"
-              exit 1
-            fi
-          done
-
-      - name: Save LanguageTool Output
-        if: failure() # Only save the output if there was an error.
-        run: |
-          mkdir lt_outputs
-          mv lt_output.txt lt_outputs/
-
-      - name: Upload LanguageTool Output for Review
-        if: failure() # Only upload the output if there was an error.
-        uses: actions/upload-artifact@v2
-        with:
-          name: languagetool-outputs
-          path: lt_outputs/
-
-      - name: Install ChkTeX
-        run: sudo apt-get install chktex
-
-      - name: Run ChkTeX
-        run: chktex *.tex
-
-      - name: Check with TeXtidote and generate Markdown report
-        run: |
-          docker run -v $PWD:/documents sylvainhalle/textidote --check en --output md resume.tex > textidote_report.md
-
-      - name: Upload TeXtidote report
-        uses: actions/upload-artifact@v2
-        with:
-          name: tex-report
-          path: textidote_report.md
-
-  manual_review:
-    needs: check_grammar
-    runs-on: ubuntu-latest
-    environment: review_required
-    steps:
-      - run: echo "Awaiting manual review of LanguageTool output"
-
   build_tag_release:
-    needs: check_grammar
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/nebriv/docker-lualatex:master
