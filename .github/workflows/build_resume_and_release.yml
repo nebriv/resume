@@ -17,13 +17,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install detex
-        run: sudo apt-get install -y detex
+      - name: Install pandoc
+        run: sudo apt-get install -y pandoc
+
 
       - name: Check grammar and spelling with LanguageTool
         run: |
           for file in $(find . -name "*.tex" -o -name "*.cls"); do
-            plaintext=$(detex $file)
+            plaintext=$(pandoc -f latex -t plain $file)
             echo $plaintext
             curl --data "language=en-US&text=$plaintext" https://api.languagetool.org/v2/check > result.json
             # Check if there are any errors
