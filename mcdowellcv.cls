@@ -230,6 +230,7 @@
 
 % Define an environment for the main job entry
 \newenvironment{jobentry}[2]{%
+		\needspace{5\baselineskip}
     \begin{center}
     \textbf{#1} \\ \textit{#2}\\[0.25em]
     \end{center}
